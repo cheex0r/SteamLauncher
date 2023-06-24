@@ -10,7 +10,7 @@ namespace SteamLauncher.Modules
     internal class RemoveWhatsNewModule
     {
         // TODO: Do not use hardcoded directories and make these parameters confirgurable.
-        private static string filepath = "C:\\Program Files (x86)\\Steam\\steamui\\css\\sp.css";
+        private static string filepath = "steamui\\css\\sp.css";
         private static string locator = "libraryhome_UpdatesContainer_17uEB{";
         private static string replace = "display: none !important;";
 

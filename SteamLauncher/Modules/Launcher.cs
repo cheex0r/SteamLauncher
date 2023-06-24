@@ -11,7 +11,7 @@ namespace SteamLauncher.Modules
         {
             Process process = new Process();
             // TODO: Do not use hardcoded directory
-            process.StartInfo.FileName = "C:\\Program Files (x86)\\Steam\\steam.exe";
+            process.StartInfo.FileName = "steam_og.exe";
             process.Start();
         }
     }
