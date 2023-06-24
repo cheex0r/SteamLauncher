@@ -1,7 +1,5 @@
 ﻿// See https://aka.ms/new-console-template for more information
 using SteamLauncher.Modules;
 
-Console.WriteLine("Hello, World!");
-
-
+RemoveWhatsNewModule.RemoveWhatsNew();
 Launcher.Launch();
