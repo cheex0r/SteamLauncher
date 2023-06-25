@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Runtime.ConstrainedExecution;
+using System.Security.AccessControl;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -9,13 +11,20 @@ namespace SteamLauncher.Modules
 {
     internal class RemoveWhatsNewModule
     {
-        // TODO: Do not use hardcoded directories and make these parameters confirgurable.
-        private static string filepath = "steamui\\css\\sp.css";
+        // TODO: Find steam installation directory instead of assuming this is being run from that location
+        private static string filepath = Directory.GetCurrentDirectory() + "\\steamui\\css\\sp.css";
         private static string locator = "libraryhome_UpdatesContainer_17uEB{";
         private static string replace = "display: none !important;";
 
-        public static void RemoveWhatsNew() { 
+        public static void RemoveWhatsNew() {
+            Console.WriteLine("Removing What's New From: " + filepath);
+
+            FileAttributes attributes = File.GetAttributes(filepath);
+            attributes = RemoveReadOnly(attributes, FileAttributes.ReadOnly);
+
+            File.SetAttributes(filepath, attributes);
             Write(Modify(Read()));
+            File.SetAttributes(filepath, File.GetAttributes(filepath) | FileAttributes.ReadOnly);
         }
 
         private static string Read()
@@ -54,6 +63,11 @@ namespace SteamLauncher.Modules
         private static void Write(string content)
         {
             File.WriteAllText(filepath, content);
+        }
+
+        private static FileAttributes RemoveReadOnly(FileAttributes attributes, FileAttributes attributesToRemove)
+        {
+            return attributes & ~attributesToRemove;
         }
     }
 }

@@ -1,5 +1,4 @@
-﻿// See https://aka.ms/new-console-template for more information
-using SteamLauncher.Modules;
+﻿using SteamLauncher.Modules;
 
 RemoveWhatsNewModule.RemoveWhatsNew();
 Launcher.Launch();
